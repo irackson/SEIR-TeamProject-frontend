@@ -12,13 +12,18 @@ const API_PORT = process.env.REACT_APP_DEV_API_PORT
     ? process.env.REACT_APP_DEV_API_PORT
     : "3000";
 
+const API_URL =
+    process.env.NODE_ENV === "production"
+        ? "https://seir-team-project.herokuapp.com"
+        : `http://localhost:${API_PORT}`;
+
 function Main(props) {
     const [runs, setRuns] = useState(null);
     const [hikes, setHikes] = useState(null);
     const [walks, setWalks] = useState(null);
-    const RunURL = `http://localhost:${API_PORT}/run/`;
-    const HikeURL = `http://localhost:${API_PORT}/hike/`;
-    const WalkURL = `http://localhost:${API_PORT}/scenic/`;
+    const RunURL = `${API_URL}/run/`;
+    const HikeURL = `${API_URL}/hike/`;
+    const WalkURL = `${API_URL}/scenic/`;
 
     const getRuns = async () => {
         const response = await fetch(RunURL, {
